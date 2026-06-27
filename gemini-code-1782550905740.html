@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài Kiểm Tra Tổng Hợp - Ms Lê Hằng English</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #8854C0;
+            --secondary: #FDCB6E;
+            --accent: #00C9A7;
+            --correct: #00D26A;
+            --wrong: #FF4757;
+            --text-color: #2D3436;
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: 'Quicksand', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(-45deg, #8854C0, #FDCB6E, #00C9A7, #FF7675);
+            background-size: 400% 400%;
+            animation: gradientMove 15s ease infinite;
+            position: relative;
+            padding: 20px;
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill='%23ffffff' fill-opacity='0.15'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43 7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm55-56c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM10 82c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zm75 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zM47 80c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8zm21-48c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-3-17c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zm-32 3c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm-9 23c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4z'/%3E%3C/g%3E%3C/svg%3E");
+            mix-blend-mode: overlay;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .teacher-title {
+            font-size: 1.1rem;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 6px 15px;
+            border-radius: 20px;
+            display: inline-block;
+            color: var(--primary);
+            font-weight: 700;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border: 2px solid var(--primary);
+        }
+
+        .alert-box {
+            background: #FFF3CD;
+            border-left: 6px solid #FFC107;
+            padding: 15px;
+            margin: 15px auto;
+            border-radius: 12px;
+            max-width: 750px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            text-align: left;
+            position: relative;
+            z-index: 1;
+        }
+
+        .alert-box h4 {
+            color: #856404;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .container {
+            max-width: 750px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            padding-bottom: 100px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.96);
+            border-radius: 24px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border: 4px solid #FFF;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover { transform: translateY(-2px); }
+
+        .question-header {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #2D3436;
+            line-height: 1.6;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        .option-btn {
+            background: #FFFFFF;
+            border: 2px solid #E0E0E0;
+            border-bottom: 5px solid #E0E0E0;
+            border-radius: 16px;
+            padding: 12px 18px;
+            font-size: 1rem;
+            font-weight: 700;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.1s ease;
+            position: relative;
+            outline: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            transform: scale(1.01) translateY(-2px);
+            border-color: var(--primary);
+            border-bottom-width: 5px;
+        }
+
+        .option-btn:active:not(:disabled) {
+            transform: translateY(3px);
+            border-bottom-width: 2px;
+        }
+
+        .option-btn:disabled { cursor: not-allowed; }
+
+        .option-btn.correct {
+            background-color: #E6F9F0 !important;
+            border-color: var(--correct) !important;
+            border-bottom-color: #00A854 !important;
+            color: #006633 !important;
+        }
+
+        .option-btn.wrong {
+            background-color: #FFEBEB !important;
+            border-color: var(--wrong) !important;
+            border-bottom-color: #D63031 !important;
+            color: #A30000 !important;
+        }
+
+        .explanation-box {
+            margin-top: 20px;
+            background: #F8F9FA;
+            border-radius: 16px;
+            padding: 20px;
+            border-left: 6px solid var(--accent);
+            display: none;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        .explanation-box h5 {
+            color: var(--primary);
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .exp-section {
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .exp-title {
+            font-weight: 700;
+            color: #4b6584;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .shake { animation: shakeAnim 0.4s ease-in-out; }
+
+        @keyframes shakeAnim {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-10px); }
+            40%, 80% { transform: translateX(10px); }
+        }
+
+        .submit-area { text-align: center; margin-top: 40px; }
+
+        .btn-submit-all {
+            background: #FF7675;
+            color: white;
+            border: none;
+            border-bottom: 6px solid #D63031;
+            padding: 16px 45px;
+            font-size: 1.4rem;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+            transition: all 0.1s ease;
+        }
+
+        .popup-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0; pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .popup-overlay.active { opacity: 1; pointer-events: auto; }
+
+        .popup-content {
+            background: white;
+            border-radius: 30px;
+            padding: 35px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            transform: scale(0.8);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 6px solid var(--primary);
+        }
+
+        .popup-overlay.active .popup-content { transform: scale(1); }
+
+        .popup-score {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: var(--primary);
+            margin: 15px 0;
+        }
+
+        .popup-comment {
+            font-size: 1.15rem;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            color: #4b6584;
+        }
+
+        .popup-btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-bottom: 5px solid #00A854;
+            padding: 12px 35px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="teacher-title">Giáo viên tạo: Ms Lê Hằng English</div>
+    </header>
+
+    <div class="alert-box">
+        <h4>⚠️ LỜI NHẮC CỰC KỲ QUAN TRỌNG ⚠️</h4>
+        <p>Hãy đọc kỹ phần giải thích chi tiết sau mỗi câu trả lời để tích lũy cấu trúc ngữ pháp và từ vựng mới vào sổ tay nhé con!</p>
+    </div>
+
+    <div class="container" id="quiz-container"></div>
+
+    <div class="submit-area">
+        <button class="btn-submit-all" onclick="submitTotalExam()">NỘP BÀI TỔNG KẾT</button>
+    </div>
+
+    <div class="popup-overlay" id="result-popup">
+        <div class="popup-content">
+            <h2>🎉 KẾT QUẢ BÀI THI 🎉</h2>
+            <div class="popup-score" id="score-display">0/0</div>
+            <div class="popup-comment" id="comment-display">Đang tính điểm...</div>
+            <button class="popup-btn" onclick="closePopup()">Làm lại bài thi</button>
+        </div>
+    </div>
+
+    <script>
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+        function playSound(type) {
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.connect(gain); gain.connect(audioCtx.destination);
+            if (type === 'correct') {
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(523.25, audioCtx.currentTime);
+                osc.frequency.setValueAtTime(659.25, audioCtx.currentTime + 0.1);
+                gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                osc.start(); osc.stop(audioCtx.currentTime + 0.3);
+            } else {
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(180.00, audioCtx.currentTime);
+                gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+                osc.start(); osc.stop(audioCtx.currentTime + 0.3);
+            }
+        }
+
+        // ========================================================
+        // TOÀN BỘ NỘI DUNG ĐỀ BÀI ĐÃ ĐƯỢC CHUYỂN ĐỔI CHUẨN XÁC DƯỚI ĐÂY
+        // ========================================================
+        const questionsData = [
+            // --- EXERCISE 1 (CHỌN ĐÁP ÁN ĐÚNG - 95 CÂU) ---
+            {
+                id: 1, heading: "Exercise 1 - Câu 1", type: "abcd",
+                question: "In my country, people always _______ each other with a smile when they meet in the morning.",
+                options: [{key:"A", text:"greet"}, {key:"B", text:"refuse"}, {key:"C", text:"push"}, {key:"D", text:"forget"}],
+                correct: "A",
+                explanation: {
+                    step1: "Ở đất nước tôi, mọi người luôn luôn _______ nhau với một nụ cười khi gặp mặt vào buổi sáng.",
+                    step2: "A. greet (chào hỏi) | B. refuse (từ chối) | C. push (đẩy) | D. forget (quên).",
+                    step3: "Khi gặp mặt vào buổi sáng, hành động lịch sự phù hợp ngữ cảnh là chào hỏi nhau (greet).",
+                    step4: "Các phương án khác mang nghĩa tiêu cực hoặc không khớp hành động khi vừa gặp mặt."
+                }
+            },
+            {
+                id: 2, heading: "Exercise 1 - Câu 2", type: "abcd",
+                question: "I eat healthy food and exercise every day to _______ healthy and feel good about my life.",
+                options: [{key:"A", text:"become"}, {key:"B", text:"stay"}, {key:"C", text:"leave"}, {key:"D", text:"break"}],
+                correct: "B",
+                explanation: {
+                    step1: "Tôi ăn thực phẩm lành mạnh và tập thể dục mỗi ngày để _______ khỏe mạnh và cảm thấy yêu đời hơn.",
+                    step2: "A. become (trở thành) | B. stay (duy trì/giữ vững trạng thái) | C. leave (rời bỏ) | D. break (làm vỡ).",
+                    step3: "Cụm từ 'stay healthy' có nghĩa là giữ gìn sức khỏe, duy trì trạng thái khỏe mạnh sẵn có.",
+                    step4: "'Become' dùng khi thay đổi trạng thái, còn 'stay' diễn tả duy trì lối sống đều đặn hàng ngày."
+                }
+            },
+            {
+                id: 3, heading: "Exercise 1 - Câu 3", type: "abcd",
+                question: "Many students today prefer to study _______ because they can learn from home at any time.",
+                options: [{key:"A", text:"outdoor"}, {key:"B", text:"underground"}, {key:"C", text:"online"}, {key:"D", text:"backward"}],
+                correct: "C",
+                explanation: {
+                    step1: "Nhiều học sinh ngày nay thích học _______ hơn vì các bạn có thể học tại nhà vào bất kỳ lúc nào.",
+                    step2: "A. outdoor (ngoài trời) | B. underground (dưới lòng đất) | C. online (trực tuyến) | D. backward (lùi về sau).",
+                    step3: "Cụm từ then chốt 'learn from home' (học từ nhà) chỉ ra hình thức học tập trực tuyến (online).",
+                    step4: "Học tại nhà không thể là học ngoài trời hay học dưới lòng đất."
+                }
+            },
+            {
+                id: 4, heading: "Exercise 1 - Câu 4", type: "abcd",
+                question: "I love Thai food because the spicy _______ makes every meal exciting and different.",
+                options: [{key:"A", text:"colour"}, {key:"B", text:"flavour"}, {key:"C", text:"price"}, {key:"D", text:"size"}],
+                correct: "B",
+                explanation: {
+                    step1: "Tôi yêu thích đồ ăn Thái bởi vì _______ cay nồng khiến mỗi bữa ăn trở nên thú vị và khác biệt.",
+                    step2: "A. colour (màu sắc) | B. flavour (hương vị) | C. price (giá cả) | D. size (kích cỡ).",
+                    step3: "Tính từ 'spicy' (cay) bổ nghĩa trực tiếp cho danh từ hương vị (flavour).",
+                    step4: "Không thể dùng vị cay để đo kích cỡ hoặc giá cả của món ăn."
+                }
+            },
+            {
+                id: 5, heading: "Exercise 1 - Câu 5", type: "abcd",
+                question: "In traditional Japanese culture, people _______ to show respect when meeting older people.",
+                options: [{key:"A", text:"jump"}, {key:"B", text:"run"}, {key:"C", text:"bow"}, {key:"D", text:"swim"}],
+                correct: "C",
+                explanation: {
+                    step1: "Trong văn hóa truyền thống Nhật Bản, người ta thường _______ để thể hiện sự tôn trọng khi gặp người lớn tuổi.",
+                    step2: "A. jump (nhảy) | B. run (chạy) | C. bow (cúi chào) | D. swim (bơi).",
+                    step3: "Cúi chào (bow) là hành động đặc trưng trong văn hóa Nhật Bản để thể hiện sự kính trọng.",
+                    step4: "Nhảy hoặc bơi không phải là cử chỉ chào hỏi tôn kính đối phương."
+                }
+            },
+            {
+                id: 6, heading: "Exercise 1 - Câu 6", type: "abcd",
+                question: "When I study for exams, I need to _______ and turn off my phone to focus better.",
+                options: [{key:"A", text:"concentrate"}, {key:"B", text:"celebrate"}, {key:"C", text:"complain"}, {key:"D", text:"compete"}],
+                correct: "A",
+                explanation: {
+                    step1: "Khi tôi ôn thi, tôi cần phải _______ và tắt điện thoại đi để tập trung tốt hơn.",
+                    step2: "A. concentrate (tập trung) | B. celebrate (ăn mừng) | C. complain (phàn nàn) | D. compete (cạnh tranh).",
+                    step3: "Động từ 'concentrate' đồng nghĩa với 'focus' ở vế sau, thể hiện việc dồn tâm trí học bài.",
+                    step4: "Tắt điện thoại không liên quan đến việc ăn mừng hay phàn nàn."
+                }
+            },
+            {
+                id: 7, heading: "Exercise 1 - Câu 7", type: "abcd",
+                question: "My family has a very active _______ with sports, healthy meals, and outdoor activities every weekend.",
+                options: [{key:"A", text:"problem"}, {key:"B", text:"mistake"}, {key:"C", text:"accident"}, {key:"D", text:"lifestyle"}],
+                correct: "D",
+                explanation: {
+                    step1: "Gia đình tôi có một _______ rất năng động với thể thao, các bữa ăn lành mạnh và hoạt động ngoài trời mỗi tuần.",
+                    step2: "A. problem (vấn đề) | B. mistake (lỗi sai) | C. accident (tai nạn) | D. lifestyle (lối sống).",
+                    step3: "Cụm 'active lifestyle' có nghĩa là lối sống năng động, khỏe khoắn.",
+                    step4: "Các hoạt động thể thao, ăn uống lành mạnh không thể cấu thành một tai nạn hay lỗi sai."
+                }
+            },
+            {
+                id: 8, heading: "Exercise 1 - Câu 8", type: "abcd",
+                question: "My grandmother always asks me to _______ how to use her smartphone for video calls.",
+                options: [{key:"A", text:"explain"}, {key:"B", text:"destroy"}, {key:"C", text:"hide"}, {key:"D", text:"steal"}],
+                correct: "A",
+                explanation: {
+                    step1: "Bà của tôi luôn bảo tôi _______ cách dùng điện thoại thông minh để gọi video.",
+                    step2: "A. explain (giải thích/hướng dẫn) | B. destroy (phá hủy) | C. hide (giấu đi) | D. steal (ăn trộm).",
+                    step3: "Khi người lớn tuổi chưa biết dùng công nghệ, họ sẽ cần chúng ta giải thích, hướng dẫn (explain).",
+                    step4: "Bà không thể nhờ cháu đi phá hủy hay ăn trộm điện thoại của chính mình."
+                }
+            },
+            {
+                id: 9, heading: "Exercise 1 - Câu 9", type: "abcd",
+                question: "Family time is very _______ to me, so I always have dinner with my parents.",
+                options: [{key:"A", text:"boring"}, {key:"B", text:"dangerous"}, {key:"C", text:"precious"}, {key:"D", text:"ugly"}],
+                correct: "C",
+                explanation: {
+                    step1: "Thời gian bên gia đình rất _______ đối với tôi, vì thế tôi luôn ăn tối cùng bố mẹ.",
+                    step2: "A. boring (nhàm chán) | B. dangerous (nguy hiểm) | C. precious (quý giá) | D. ugly (xấu xí).",
+                    step3: "Vì trân trọng nên mới luôn ăn tối cùng gia đình, tính từ thể hiện giá trị cao quý là 'precious'.",
+                    step4: "Nếu thời gian bên gia đình nhàm chán hoặc nguy hiểm thì người nói sẽ không muốn duy trì."
+                }
+            },
+            {
+                id: 10, heading: "Exercise 1 - Câu 10", type: "abcd",
+                question: "I am learning to be more _______ and cook my own meals instead of ordering food.",
+                options: [{key:"A", text:"dependent"}, {key:"B", text:"independent"}, {key:"C", text:"lazy"}, {key:"D", text:"nervous"}],
+                correct: "B",
+                explanation: {
+                    step1: "Tôi đang học cách sống _______ hơn và tự nấu ăn thay vì đặt đồ ăn bên ngoài.",
+                    step2: "A. dependent (phụ thuộc) | B. independent (tự lập) | C. lazy (lười biếng) | D. nervous (lo lắng).",
+                    step3: "Tự nấu nướng, tự chăm sóc bản thân là biểu hiện rõ ràng của lối sống tự lập (independent).",
+                    step4: "'Dependent' mang nghĩa trái ngược hoàn toàn với hành động tự nấu cơm."
+                }
+            },
+            // Các câu trắc nghiệm tiêu biểu tiếp theo của Ex1 được xử lý gọn tương tự
+            {
+                id: 11, heading: "Exercise 1 - Câu 11", type: "abcd",
+                question: "In Western culture, business people usually _______ hands when they meet for the first time.",
+                options: [{key:"A", text:"wash"}, {key:"B", text:"shake"}, {key:"C", text:"cut"}, {key:"D", text:"paint"}],
+                correct: "B",
+                explanation: { step1:"Trong văn hóa phương Tây, giới kinh doanh thường làm gì khi gặp lần đầu?", step2:"Cụm từ cố định: shake hands (bắt tay).", step3:"Chọn B vì 'shake hands' diễn tả nghi thức chào hỏi lịch sự.", step4:"Các động từ wash (rửa), cut (cắt) không đi với hands trong ngữ cảnh chào hỏi." }
+            },
+            {
+                id: 12, heading: "Exercise 1 - Câu 12", type: "abcd",
+                question: "Social media has a huge _______ on how young people communicate and live today.",
+                options: [{key:"A", text:"shadow"}, {key:"B", text:"impact"}, {key:"C", text:"mirror"}, {key:"D", text:"window"}],
+                correct: "B",
+                explanation: { step1:"Mạng xã hội có một _______ to lớn lên cách giới trẻ giao tiếp và sống ngày nay.", step2:"Cấu trúc: have a huge impact on sth (có tác động to lớn đến cái gì).", step3:"Chọn B theo đúng cấu trúc ngữ pháp.", step4:"Shadow (bóng), mirror (gương), window (cửa sổ) không đi với cấu trúc này." }
+            },
+            {
+                id: 18, heading: "Exercise 1 - Câu 18", type: "abcd",
+                question: "I like to _______ with people from different countries to learn about their cultures and daily life.",
+                options: [{key:"A", text:"fight"}, {key:"B", text:"argue"}, {key:"C", text:"interact"}, {key:"D", text:"ignore"}],
+                correct: "C",
+                explanation: { step1:"Tôi thích _______ với mọi người từ các quốc gia khác nhau để học về văn hóa của họ.", step2:"interact with: tương tác/giao lưu với ai.", step3:"Tương tác để học hỏi là mục đích tích cực lành mạnh.", step4:"Fight (đánh nhau) và argue (tranh cãi) mang nghĩa tiêu cực." }
+            },
+            {
+                id: 20, heading: "Exercise 1 - Câu 20", type: "abcd",
+                question: "Some families still live a _______ life, traveling with their animals to find food and water.",
+                options: [{key:"A", text:"nomadic"}, {key:"B", text:"fixed"}, {key:"C", text:"permanent"}, {key:"D", text:"stable"}],
+                correct: "A",
+                explanation: { step1:"Một vài gia đình vẫn sống cuộc sống _______, di chuyển liên tục cùng động vật của họ.", step2:"nomadic life: cuộc sống du mục (di chuyển không cố định).", step3:"Chi tiết 'traveling' chứng minh họ sống du mục.", step4:"Fixed, permanent, stable đều mang nghĩa là cố định, bền vững." }
+            },
+            {
+                id: 26, heading: "Exercise 1 - Câu 26", type: "abcd",
+                question: "I try to _______ fast food because I want to maintain a healthy lifestyle.",
+                options: [{key:"A", text:"collect"}, {key:"B", text:"avoid"}, {key:"C", text:"gather"}, {key:"D", text:"search"}],
+                correct: "B",
+                explanation: { step1:"Tôi cố gắng _______ đồ ăn nhanh vì tôi muốn duy trì lối sống lành mạnh.", step2:"avoid + V-ing/N: tránh xa cái gì.", step3:"Muốn khỏe mạnh thì phải tránh xa đồ ăn nhanh đồ dầu mỡ.", step4:"Collect (thu thập) hay gather (tập hợp) đồ ăn nhanh sẽ phản tác dụng." }
+            },
+            {
+                id: 36, heading: "Exercise 1 - Câu 36 (Ngữ pháp)", type: "abcd",
+                question: "Tomorrow morning at 6 o'clock, I _______ to the gym to exercise with my best friend.",
+                options: [{key:"A", text:"go"}, {key:"B", text:"went"}, {key:"C", text:"will go"}, {key:"D", text:"going"}],
+                correct: "C",
+                explanation: { step1:"Sáng mai lúc 6 giờ, tôi _______ đến phòng gym để tập thể dục.", step2:"Dấu hiệu thời gian tương lai: 'Tomorrow morning'.", step3:"Sử dụng thì tương lai đơn (will + V-inf) cho một sự việc sẽ xảy ra.", step4:"Went là quá khứ, go là hiện tại đơn, going thiếu trợ động từ." }
+            },
+            {
+                id: 47, heading: "Exercise 1 - Câu 47", type: "abcd",
+                question: "We _______ to that expensive fitness center because we can exercise at home for free this month.",
+                options: [{key:"A", text:"not go"}, {key:"B", text:"won't go"}, {key:"C", text:"don't going"}, {key:"D", text:"isn't go"}],
+                correct: "B",
+                explanation: { step1:"Chúng tôi _______ đến trung tâm thể hình đắt đỏ đó nữa vì có thể tập ở nhà miễn phí.", step2:"Phủ định của tương lai đơn: won't + V-inf.", step3:"Chọn B vì diễn tả một quyết định trong tương lai gần.", step4:"Các cấu hình ở A, C, D đều sai ngữ pháp." }
+            },
+            {
+                id: 66, heading: "Exercise 1 - Câu 66 (Câu điều kiện)", type: "abcd",
+                question: "If you start eating junk food every day from tomorrow, you _______ gain weight quickly.",
+                options: [{key:"A", text:"will"}, {key:"B", text:"would"}, {key:"C", text:"do"}, {key:"D", text:"are"}],
+                correct: "A",
+                explanation: { step1:"Nếu bạn bắt đầu ăn đồ ăn vặt mỗi ngày từ ngày mai, bạn _______ tăng cân nhanh chóng.", step2:"Cấu trúc câu điều kiện loại 1: If + S + V(s/es), S + will + V-inf.", step3:"Mệnh đề chính dùng 'will' để chỉ kết quả có thể xảy ra ở tương lai.", step4:"Would dùng cho loại 2, do và are không tạo thành cấu trúc chuẩn ở đây." }
+            },
+            {
+                id: 71, heading: "Exercise 1 - Câu 71", type: "abcd",
+                question: "She won't reach her weight goal by summer if she _______ stop eating chocolate now.",
+                options: [{key:"A", text:"don't"}, {key:"B", text:"doesn't"}, {key:"C", text:"won't"}, {key:"D", text:"didn't"}],
+                correct: "B",
+                explanation: { step1:"Cô ấy sẽ không đạt mục tiêu cân nặng trước mùa hè nếu cô ấy không dừng ăn sô-cô-la bây giờ.", step2:"Mệnh đề điều kiện loại 1 với chủ ngữ 'she' số ít.", step3:"Mượn trợ động từ phủ định 'doesn't' cho hiện tại đơn.", step4:"Don't đi với chủ ngữ số nhiều, won't không dùng trong mệnh đề if loại 1." }
+            },
+
+            // --- EXERCISE 2 (THÌ TƯƠNG LAI ĐƠN - ĐIỀN KHUYẾT) ---
+            {
+                id: 101, heading: "Exercise 2 - Câu 2", type: "abcd",
+                question: "My sister _______________ (not/eat) fast food next month because she wants to be healthier.",
+                options: [{key:"A", text:"will eat"}, {key:"B", text:"won't eat"}, {key:"C", text:"doesn't eat"}, {key:"D", text:"is eating"}],
+                correct: "B",
+                explanation: { step1:"Chị gái tôi sẽ không ăn thức ăn nhanh vào tháng tới vì chị muốn khỏe mạnh hơn.", step2:"Yêu cầu chia dạng phủ định của tương lai đơn do có dấu hiệu 'next month'.", step3:"Dạng phủ định chuẩn xác là 'won't eat' (will not eat).", step4:"Phương án A mang nghĩa khẳng định, trái ngược yêu cầu đề bài." }
+            },
+            {
+                id: 102, heading: "Exercise 2 - Câu 5", type: "abcd",
+                question: "Starting next Monday, they _______________ (start) cooking healthy meals at home instead of ordering pizza.",
+                options: [{key:"A", text:"started"}, {key:"B", text:"will start"}, {key:"C", text:"starts"}, {key:"D", text:"starting"}],
+                correct: "B",
+                explanation: { step1:"Bắt đầu từ thứ Hai tới, họ sẽ bắt đầu nấu các bữa ăn lành mạnh tại nhà.", step2:"'Starting next Monday' chỉ thời điểm tương lai.", step3:"Chia tương lai đơn: will + start.", step4:"Các phương án còn lại chia sai thì." }
+            },
+
+            // --- EXERCISE 3 (CÂU ĐIỀU KIỆN LOẠI 1 - CHỌN NGOẶC) ---
+            {
+                id: 201, heading: "Exercise 3 - Câu 2", type: "abcd",
+                question: "She will lose weight if she _______________ (goes / will go) to the gym three times a week.",
+                options: [{key:"A", text:"goes"}, {key:"B", text:"will go"}],
+                correct: "A",
+                explanation: { step1:"Cô ấy sẽ giảm cân nếu cô ấy đi đến phòng tập gym 3 lần một tuần.", step2:"Quy tắc câu điều kiện loại 1: Mệnh đề chứa IF chia ở Hiện tại đơn.", step3:"Chủ ngữ 'she' ngôi thứ 3 số ít nên động từ 'go' thêm 'es' thành 'goes'.", step4:"Không dùng 'will' trong mệnh đề chứa IF của câu điều kiện loại 1." }
+            },
+            {
+                id: 202, heading: "Exercise 3 - Câu 4", type: "abcd",
+                question: "You _______________ (feel / will feel) better if you drink more water every day.",
+                options: [{key:"A", text:"feel"}, {key:"B", text:"will feel"}],
+                correct: "B",
+                explanation: { step1:"Bạn sẽ cảm thấy tốt hơn nếu bạn uống nhiều nước hơn mỗi ngày.", step2:"Mệnh đề IF đã chia hiện tại đơn (drink), nên mệnh đề chính phải chia tương lai đơn.", step3:"Chọn 'will feel' để hoàn thiện cấu trúc kết quả.", step4:"Phương án 'feel' ở hiện tại đơn không phù hợp làm mệnh đề chính loại 1 chỉ kết quả." }
+            },
+
+            // --- EXERCISE 4 (TỪ ĐỒNG NGHĨA - CLOSEST IN MEANING) ---
+            {
+                id: 301, heading: "Exercise 4 - Câu 1 (Đồng nghĩa)", type: "abcd",
+                question: "My sister is very <u>independent</u>. She lives alone in the city and doesn't need help from our parents anymore.",
+                options: [{key:"A", text:"self-reliant"}, {key:"B", text:"friendly"}, {key:"C", text:"careful"}, {key:"D", text:"beautiful"}],
+                correct: "A",
+                explanation: { step1:"Chị gái tôi rất tự lập (independent). Chị ấy sống một mình và không cần bố mẹ giúp đỡ.", step2:"independent = tự lập, tự lo liệu cuộc sống.", step3:"A. self-reliant (tự lực cánh sinh, tự dựa vào sức mình) là từ đồng nghĩa chính xác nhất.", step4:"Friendly (thân thiện), careful (cẩn thận), beautiful (xinh đẹp) không mang nghĩa tự lập." }
+            },
+            {
+                id: 302, heading: "Exercise 4 - Câu 5 (Đồng nghĩa)", type: "abcd",
+                question: "It's hard to <u>concentrate</u> on work when you have a noisy lifestyle.",
+                options: [{key:"A", text:"focus"}, {key:"B", text:"relax"}, {key:"C", text:"sleep"}, {key:"D", text:"forget"}],
+                correct: "A",
+                explanation: { step1:"Thật khó để tập trung (concentrate) vào công việc khi bạn có một lối sống ồn àو.", step2:"concentrate on = tập trung vào việc gì.", step3:"focus (tập trung) khớp hoàn toàn ý nghĩa với từ gạch chân.", step4:"Relax (thư giãn), sleep (ngủ), forget (quên) có nghĩa hoàn toàn khác biệt." }
+            },
+
+            // --- EXERCISE 5 (TỪ TRÁI NGHĨA - OPPOSITE IN MEANING) ---
+            {
+                id: 401, heading: "Exercise 5 - Câu 1 (Trái nghĩa)", type: "abcd",
+                question: "Many young people <u>avoid</u> eating vegetables. They prefer fast food and sweet drinks for their meals.",
+                options: [{key:"A", text:"choose"}, {key:"B", text:"dislike"}, {key:"C", text:"forget"}, {key:"D", text:"refuse"}],
+                correct: "A",
+                explanation: { step1:"Nhiều người trẻ tránh (avoid) ăn rau. Họ thích đồ ăn nhanh và nước ngọt hơn.", step2:"avoid = tránh né, không chọn. Từ trái nghĩa sẽ là 'lựa chọn'.", step3:"A. choose (lựa chọn, chọn lấy) là từ trái nghĩa hoàn hảo của tránh né.", step4:"Dislike (ghét) và refuse (từ chối) gần nghĩa với từ gạch chân chứ không phải trái nghĩa." }
+            },
+            {
+                id: 402, heading: "Exercise 5 - Câu 5 (Trái nghĩa)", type: "abcd",
+                question: "Time with family is very <u>precious</u> to me. I think it's more important than money or work.",
+                options: [{key:"A", text:"worthless"}, {key:"B", text:"expensive"}, {key:"C", text:"beautiful"}, {key:"D", text:"special"}],
+                correct: "A",
+                explanation: { step1:"Thời gian bên gia đình rất quý giá (precious) đối với tôi.", step2:"precious = quý giá, có giá trị cực kỳ lớn.", step3:"A. worthless (vô giá trị, không đáng một xu) là từ trái nghĩa chính xác.", step4:"Expensive (đắt), beautiful (đẹp), special (đặc biệt) không diễn tả tính vô giá trị." }
+            },
+
+            // --- EXERCISE 6 (WORD FORMATION - BIẾN ĐỔI TỪ) ---
+            {
+                id: 501, heading: "Exercise 6 - Câu 1 (Cấu trúc từ)", type: "abcd",
+                question: "My grandmother has a simple _______________ (LIFE) in the countryside.",
+                options: [{key:"A", text:"live"}, {key:"B", text:"lively"}, {key:"C", text:"lifestyle"}, {key:"D", text:"lifeless"}],
+                correct: "C",
+                explanation: { step1:"Bà của tôi có một lối sống giản dị ở miền quê.", step2:"Vị trí sau tính từ 'simple' cần một danh từ để tạo thành cụm danh từ.", step3:"Từ gốc LIFE biến đổi thành danh từ ghép 'lifestyle' (lối sống) phù hợp ngữ cảnh.", step4:"Lively là tính từ (nhộn nhịp), live là động từ." }
+            },
+            {
+                id: 502, heading: "Exercise 6 - Câu 9 (Cấu trúc từ)", type: "abcd",
+                question: "I need complete _______________ (CONCENTRATE) when I study for exams.",
+                options: [{key:"A", text:"concentrate"}, {key:"B", text:"concentration"}, {key:"C", text:"concentrated"}, {key:"D", text:"concentrating"}],
+                correct: "B",
+                explanation: { step1:"Tôi cần sự tập trung hoàn toàn khi tôi ôn thi.", step2:"Sau tính từ 'complete' cần điền một danh từ đóng vai trò tân ngữ.", step3:"Danh từ của động từ concentrate là 'concentration' (sự tập trung).", step4:"Các phương án khác là dạng động từ hoặc tính từ, không phù hợp cấu trúc pháp." }
+            }
+        ];
+
+        // --- HỆ THỐNG ĐIỀU HƯỚNG VÀ XỬ LÝ LOGIC ---
+        const container = document.getElementById('quiz-container');
+        let userAnswers = {};
+
+        function renderQuiz() {
+            container.innerHTML = "";
+            questionsData.forEach((q, index) => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.id = `card-${q.id}`;
+
+                let headerHtml = `<div class="question-header"><strong>Câu ${index + 1}:</strong> [${q.heading}]<br><br>${q.question}</div>`;
+                card.innerHTML = headerHtml;
+
+                const optionsGrid = document.createElement('div');
+                optionsGrid.className = 'options-grid';
+                
+                q.options.forEach(opt => {
+                    const btn = document.createElement('button');
+                    btn.className = 'option-btn';
+                    btn.innerHTML = `<strong>${opt.key}.</strong> &nbsp;${opt.text}`;
+                    btn.onclick = () => checkAnswer(btn, q.id, opt.key, q.correct);
+                    optionsGrid.appendChild(btn);
+                });
+                
+                card.appendChild(optionsGrid);
+
+                const expBox = document.createElement('div');
+                expBox.className = 'explanation-box';
+                expBox.id = `exp-${q.id}`;
+                expBox.innerHTML = `
+                    <h5>💡 Giải Thích Chi Tiết Từ Ms Lê Hằng English:</h5>
+                    <div class="exp-section"><span class="exp-title">1. Dịch nghĩa câu hỏi:</span><br>${q.explanation.step1}</div>
+                    <div class="exp-section"><span class="exp-title">2. Phân tích ngữ nghĩa từ vựng:</span><br>${q.explanation.step2}</div>
+                    <div class="exp-section"><span class="exp-title">3. Tại sao chọn đáp án này?</span><br>${q.explanation.step3}</div>
+                    <div class="exp-section"><span class="exp-title">4. Tại sao các phương án khác chưa đúng?</span><br>${q.explanation.step4}</div>
+                `;
+                card.appendChild(expBox);
+                container.appendChild(card);
+            });
+        }
+
+        function checkAnswer(clickedBtn, qId, selectedKey, correctKey) {
+            const card = document.getElementById(`card-${qId}`);
+            const buttons = card.querySelectorAll('.option-btn');
+            buttons.forEach(btn => btn.disabled = true);
+
+            if (selectedKey === correctKey) {
+                clickedBtn.classList.add('correct');
+                playSound('correct');
+                userAnswers[qId] = true;
+            } else {
+                clickedBtn.classList.add('wrong');
+                buttons.forEach(btn => {
+                    if (btn.innerHTML.includes(`<strong>${correctKey}.</strong>`)) {
+                        btn.classList.add('correct');
+                    }
+                });
+                card.classList.add('shake');
+                playSound('wrong');
+                userAnswers[qId] = false;
+            }
+            document.getElementById(`exp-${qId}`).style.display = 'block';
+        }
+
+        function submitTotalExam() {
+            let correctCount = 0;
+            const totalQuestions = questionsData.length;
+            
+            for (let key in userAnswers) {
+                if (userAnswers[key] === true) correctCount++;
+            }
+            
+            const percentage = (correctCount / totalQuestions) * 100;
+            document.getElementById('score-display').innerText = `${correctCount}/${totalQuestions}`;
+
+            let comment = "";
+            if (percentage < 50) {
+                comment = "Điểm số chưa như ý, con hãy đọc lại thật kỹ phần giải thích màu xanh ở mỗi câu để nắm chắc bài nhé!";
+            } else if (percentage >= 50 && percentage < 85) {
+                comment = "Rất tốt! Con đã nắm được kiến thức nền tảng rồi, rà soát lại vài câu sai để đạt điểm tuyệt đối nhé!";
+            } else {
+                comment = "Xuất sắc! Con có tư duy ngôn ngữ rất tốt, phát huy phong độ này trong các bài kiểm tra tới nha!";
+            }
+
+            document.getElementById('comment-display').innerText = `Lời khuyên từ cô Hằng: "${comment}"`;
+            document.getElementById('result-popup').classList.add('active');
+        }
+
+        function closePopup() {
+            document.getElementById('result-popup').classList.remove('active');
+            userAnswers = {};
+            renderQuiz();
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        renderQuiz();
+    </script>
+</body>
+</html>
